@@ -1,4 +1,4 @@
-from .StableAnimatorNode import StableAnimatorNode
+from .nodes import StableAnimatorNode
 
 NODE_CLASS_MAPPINGS = {
     "StableAnimatorNode": StableAnimatorNode

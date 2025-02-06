@@ -1,22 +1,10 @@
 import os
 import subprocess
-from comfyui import ComfyUI, Node, InputField, OutputField
-
-class StableAnimatorNode(Node):
-    name = "StableAnimator"
-    description = "Generate high-quality identity-preserving human image animations using StableAnimator."
-    category = "Custom"
-
-    inputs = [
-        InputField("reference_image", "Reference Image", "image"),
-        InputField("pose_sequence", "Pose Sequence", "image_sequence"),
-        InputField("output_path", "Output Path", "string", default="output"),
-        InputField("resolution", "Resolution", "string", default="512x512")
-    ]
-
-    outputs = [
-        OutputField("animation", "Generated Animation", "image_sequence")
-    ]
+class StableAnimatorNode:
+    def __init__(self):
+        self.name = "StableAnimator"
+        self.description = "Generate high-quality identity-preserving human image animations using StableAnimator."
+        self.category = "Custom"
 
     def run(self, reference_image, pose_sequence, output_path, resolution):
         # Ensure the output directory exists
@@ -48,7 +36,6 @@ class StableAnimatorNode(Node):
             if file.startswith("frame_") and file.endswith(".png"):
                 animation_frames.append(os.path.join(output_path, file))
 
-        return {"animation": animation_frames}
+        return animation_frames
 
 # Register the node in ComfyUI
-ComfyUI.register_node(StableAnimatorNode)
